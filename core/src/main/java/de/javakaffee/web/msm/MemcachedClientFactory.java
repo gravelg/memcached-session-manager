@@ -15,11 +15,7 @@
  */
 package de.javakaffee.web.msm;
 
-import net.spy.memcached.BinaryConnectionFactory;
-import net.spy.memcached.ConnectionFactory;
-import net.spy.memcached.ConnectionFactoryBuilder;
-import net.spy.memcached.DefaultConnectionFactory;
-import net.spy.memcached.MemcachedClient;
+import net.spy.memcached.*;
 import net.spy.memcached.auth.AuthDescriptor;
 import net.spy.memcached.auth.PlainCallbackHandler;
 
@@ -78,6 +74,7 @@ public class MemcachedClientFactory {
                                 memcachedNodesManager.getSessionIdFormat(), statistics, operationTimeout, maxReconnectDelay,
                                 authDescriptor)
                         : new ConnectionFactoryBuilder().setProtocol(ConnectionFactoryBuilder.Protocol.BINARY)
+                                .setLocatorType(ConnectionFactoryBuilder.Locator.CONSISTENT)
                                 .setAuthDescriptor(authDescriptor)
                                 .setOpTimeout(operationTimeout)
                                 .setMaxReconnectDelay(maxReconnectDelay)
